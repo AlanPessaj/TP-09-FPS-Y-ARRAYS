@@ -5,7 +5,6 @@ using UnityEngine;
 public class Personaje : MonoBehaviour
 {
     public int nivelHambre;
-    public AlimentoScript alimento;
     
     // Start is called before the first frame update
     void Start()
@@ -17,5 +16,19 @@ public class Personaje : MonoBehaviour
     void Update()
     {
         
+    }
+    void TomarAlimento(int valorAlimentario)
+    {
+        nivelHambre -= valorAlimentario;
+        if(nivelHambre <= 0)
+        {
+            nivelHambre = 0;
+        }
+    }
+    public void OnTriggerEnter(Collider other) 
+    {
+        AlimentoScript alimento;
+        alimento = other.GetComponent<AlimentoScript>();
+        TomarAlimento(alimento.valorAlimentario); 
     }
 }
